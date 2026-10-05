@@ -1,0 +1,41 @@
+run_name: synthetic_clip_base
+model: openai/clip-vit-base-patch32
+gallery_dir: data/eval_gallery
+gallery_index: outputs/eval_gallery_clip_base.npz
+output_root: outputs/eval_runs
+top_k: 10
+normalize_output: true
+
+pairs:
+  - name: red_square__blue_square
+    image_a: data/eval_gallery/red_square_solid.png
+    image_b: data/eval_gallery/blue_square_solid.png
+  - name: red_circle__blue_circle
+    image_a: data/eval_gallery/red_circle_solid.png
+    image_b: data/eval_gallery/blue_circle_solid.png
+  - name: red_square__red_circle
+    image_a: data/eval_gallery/red_square_solid.png
+    image_b: data/eval_gallery/red_circle_solid.png
+  - name: solid_square__striped_square
+    image_a: data/eval_gallery/green_square_solid.png
+    image_b: data/eval_gallery/green_square_striped.png
+  - name: yellow_circle__purple_triangle
+    image_a: data/eval_gallery/yellow_circle_solid.png
+    image_b: data/eval_gallery/purple_triangle_solid.png
+
+operations:
+  - name: average
+  - name: lerp
+    params:
+      t: [0.25, 0.5, 0.75]
+  - name: slerp
+    params:
+      t: [0.25, 0.5, 0.75]
+  - name: weighted-sum
+    params:
+      alpha: [1.0]
+      beta: [-0.5, 0.5, 1.0]
+  - name: project-a-on-b
+  - name: reject-a-from-b
+  - name: reflect-a-across-b
+  - name: cosine-bisector

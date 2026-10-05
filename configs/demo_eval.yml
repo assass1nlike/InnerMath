@@ -1,0 +1,35 @@
+run_name: demo_clip_base
+model: openai/clip-vit-base-patch32
+gallery_dir: data/demo_gallery
+gallery_index: outputs/demo_gallery_clip_base.npz
+output_root: outputs/eval_runs
+top_k: 8
+normalize_output: true
+
+pairs:
+  - name: red_square__blue_square
+    image_a: data/demo_gallery/red_square.png
+    image_b: data/demo_gallery/blue_square.png
+  - name: red_circle__blue_circle
+    image_a: data/demo_gallery/red_circle.png
+    image_b: data/demo_gallery/blue_circle.png
+  - name: red_square__red_circle
+    image_a: data/demo_gallery/red_square.png
+    image_b: data/demo_gallery/red_circle.png
+
+operations:
+  - name: average
+  - name: lerp
+    params:
+      t: [0.25, 0.5, 0.75]
+  - name: slerp
+    params:
+      t: [0.25, 0.5, 0.75]
+  - name: weighted-sum
+    params:
+      alpha: [1.0]
+      beta: [-0.5, 0.5, 1.0]
+  - name: project-a-on-b
+  - name: reject-a-from-b
+  - name: reflect-a-across-b
+  - name: cosine-bisector

@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "innermath"
+version = "0.1.0"
+description = "Explore mathematical structures in model representations."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+image = [
+  "pillow>=10.0",
+  "torch>=2.1",
+  "transformers>=4.45",
+]
+dev = [
+  "pytest>=8.0",
+]
+generate = [
+  "diffusers>=0.35",
+  "accelerate>=1.0",
+]
+
+[project.scripts]
+innermath = "innermath.cyclic:main"
+innermath-image = "innermath.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["innermath"]
